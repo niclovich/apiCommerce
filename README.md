@@ -5,21 +5,6 @@ Permite realizar operaciones **CRUD** sobre productos.
 
 ---
 
-## **📂 Estructura del proyecto**
-apiCommerce/
-├─ src/
-│ ├─ controllers/
-│ │ └─ products.controller.js
-│ ├─ dao/
-│ │ └─ ProductManager.js
-│ ├─ routes/
-│ │ └─ products.routes.js
-│ ├─ data/
-│ │ └─ products.json
-│ └─ app.js
-├─ package.json
-└─ node_modules/
-
 
 ### **Descripción de carpetas**
 
