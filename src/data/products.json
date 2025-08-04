@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "title": "Monitor 24\" Full HD",
+    "title": "Monitor 27\" Full HD",
     "description": "Monitor LED de 24 pulgadas, resolución 1920x1080",
     "code": "MON24FHD",
     "price": 150,
@@ -67,8 +67,7 @@
     "thumbnails": [
       "/images/webcam/webcam_hd_front.jpg"
     ]
-  }
-  ,
+  },
   {
     "id": 6,
     "title": "Disco Duro Externo 1TB",
@@ -82,8 +81,7 @@
       "/images/discos/disco_externo_front.jpg",
       "/images/discos/disco_externo_side.jpg"
     ]
-  }
-  ,
+  },
   {
     "id": 7,
     "title": "Router WiFi Doble Banda",
@@ -97,8 +95,7 @@
       "/images/routers/router_front.jpg",
       "/images/routers/router_back.jpg"
     ]
-  }
-  ,
+  },
   {
     "id": 8,
     "title": "Cargador Rápido USB-C",
@@ -111,33 +108,31 @@
     "thumbnails": [
       "/images/cargadores/cargador_usb_c_front.jpg"
     ]
+  },
+  {
+    "id": 9,
+    "title": "Soporte para Monitor Ajustable",
+    "description": "Soporte ergonómico para monitor, ajustable en altura y ángulo",
+    "code": "SOPMON01",
+    "price": 45,
+    "status": true,
+    "stock": 22,
+    "category": "Muebles",
+    "thumbnails": [
+      "/images/soportes/soporte_monitor_front.jpg"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Lámpara LED de Escritorio",
+    "description": "Lámpara LED regulable con puerto USB para carga",
+    "code": "LAMLED01",
+    "price": 55,
+    "status": true,
+    "stock": 28,
+    "category": "Iluminación",
+    "thumbnails": [
+      "/images/lamparas/lampara_led_front.jpg"
+    ]
   }
-    ,
-    {
-        "id": 9,
-        "title": "Soporte para Monitor Ajustable",
-        "description": "Soporte ergonómico para monitor, ajustable en altura y ángulo",
-        "code": "SOPMON01",
-        "price": 45,
-        "status": true,
-        "stock": 22,
-        "category": "Muebles",
-        "thumbnails": [
-        "/images/soportes/soporte_monitor_front.jpg"
-        ]
-    }
-    ,  
-    {
-        "id": 10,
-        "title": "Lámpara LED de Escritorio",
-        "description": "Lámpara LED regulable con puerto USB para carga",
-        "code": "LAMLED01",
-        "price": 55,
-        "status": true,
-        "stock": 28,
-        "category": "Iluminación",
-        "thumbnails": [
-        "/images/lamparas/lampara_led_front.jpg"
-        ]
-    }
 ]

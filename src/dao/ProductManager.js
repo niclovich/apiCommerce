@@ -47,6 +47,31 @@ class ProductoManager {
     await this.#writeFile(productos);
     return nuevoProducto;
   }
+
+   async updateProduct(id, data) {
+    const productos = await this.#readFile();
+    const index = productos.findIndex(p => p.id === id);
+
+    if (index === -1) return { error: `No se encontró el producto con ID ${id}` };
+
+    // Actualiza solo las propiedades que vengan en "data"
+    productos[index] = { ...productos[index], ...data };
+
+    await this.#writeFile(productos);
+    return productos[index];
+  }
+
+  async deleteProduct(id) {
+    const productos = await this.#readFile();
+    const index = productos.findIndex(p => p.id === id);
+
+    if (index === -1) return { error: `No se encontró el producto con ID ${id}` };
+
+    const eliminado = productos.splice(index, 1)[0];
+    await this.#writeFile(productos);
+
+    return { message: `Producto con ID ${id} eliminado correctamente`, deleted: eliminado };
+  }
 }
 
 export default ProductoManager;
