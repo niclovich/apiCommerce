@@ -1,4 +1,4 @@
-import ProductoManager from '../dao/ProductManager.js';
+import ProductoManager from "../dao/ProductManager.js";
 
 const ProductManager = new ProductoManager();
 
@@ -24,29 +24,38 @@ export const getProductById = async (req, res) => {
 
 export const createProduct = async (req, res) => {
   try {
-    const { title, description, code, price, status, stock, category, thumbnails } = req.body;
+    const {
+      title,
+      description,
+      code,
+      price,
+      status,
+      stock,
+      category,
+      thumbnails,
+    } = req.body;
 
     if (!title || !code || price === undefined || stock === undefined) {
       return res.status(400).json({
-        error: "Los campos title, code, price y stock son obligatorios."
+        error: "Los campos title, code, price y stock son obligatorios.",
       });
     }
 
-    if (typeof title !== 'string' || typeof code !== 'string') {
+    if (typeof title !== "string" || typeof code !== "string") {
       return res.status(400).json({
-        error: "title y code deben ser cadenas de texto."
+        error: "title y code deben ser cadenas de texto.",
       });
     }
 
     if (isNaN(price) || price < 0) {
       return res.status(400).json({
-        error: "price debe ser un número mayor o igual a 0."
+        error: "price debe ser un número mayor o igual a 0.",
       });
     }
 
     if (isNaN(stock) || stock < 0) {
       return res.status(400).json({
-        error: "stock debe ser un número mayor o igual a 0."
+        error: "stock debe ser un número mayor o igual a 0.",
       });
     }
 
@@ -55,25 +64,22 @@ export const createProduct = async (req, res) => {
       description || "",
       code,
       parseFloat(price),
-      status ?? true,         // por defecto true si no viene
+      status ?? true, // por defecto true si no viene
       parseInt(stock),
       category || "",
       thumbnails || []
     );
 
-    // 4️⃣ Responder con éxito
     res.status(201).json({
-      message: "✅ Producto creado correctamente",
-      product: nuevo
+      message: " Producto creado correctamente",
+      product: nuevo,
     });
-
   } catch (error) {
     console.error("❌ Error en createProduct:", error.message);
     res.status(500).json({
       error: "Error interno del servidor",
-      details: error.message
+      details: error.message,
     });
-
   }
 };
 
@@ -83,17 +89,19 @@ export const updateProduct = async (req, res) => {
     const productId = parseInt(id, 10);
 
     if (isNaN(productId)) {
-      return res.status(400).json({ error: "El ID debe ser un número válido." });
+      return res
+        .status(400)
+        .json({ error: "El ID debe ser un número válido." });
     }
 
     const data = req.body;
 
-    // 2️⃣ Verificar que haya datos para actualizar
     if (!data || Object.keys(data).length === 0) {
-      return res.status(400).json({ error: "Debe enviar al menos un campo para actualizar." });
+      return res
+        .status(400)
+        .json({ error: "Debe enviar al menos un campo para actualizar." });
     }
 
-    // 3️⃣ Intentar actualizar
     const actualizado = await ProductManager.updateProduct(productId, data);
 
     if (actualizado.error) {
@@ -102,10 +110,10 @@ export const updateProduct = async (req, res) => {
 
     res.status(200).json({
       message: "✅ Producto actualizado correctamente",
-      product: actualizado
+      product: actualizado,
     });
   } catch (error) {
-    console.error("❌ Error en updateProduct:", error.message);
+    console.error(" Error en updateProduct:", error.message);
     res.status(500).json({ error: "Error interno del servidor" });
   }
 };
@@ -116,7 +124,9 @@ export const deleteProduct = async (req, res) => {
     const productId = parseInt(id, 10);
 
     if (isNaN(productId)) {
-      return res.status(400).json({ error: "El ID debe ser un número válido." });
+      return res
+        .status(400)
+        .json({ error: "El ID debe ser un número válido." });
     }
 
     // 2️⃣ Intentar eliminar
@@ -128,10 +138,10 @@ export const deleteProduct = async (req, res) => {
 
     res.status(200).json({
       message: "✅ Producto eliminado correctamente",
-      deleted: eliminado.deleted
+      deleted: eliminado.deleted,
     });
   } catch (error) {
-    console.error("❌ Error en deleteProduct:", error.message);
+    console.error(" Error en deleteProduct:", error.message);
     res.status(500).json({ error: "Error interno del servidor" });
   }
 };

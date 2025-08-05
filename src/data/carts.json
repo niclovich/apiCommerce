@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "products": [
+      {
+        "product": 5,
+        "quantity": 12
+      }
+    ],
+    "createdAt": "2025-08-05T15:30:00Z",
+    "updatedAt": "2025-08-05T23:35:30.134Z",
+    "status": "active",
+    "total": 720
+  },
+  {
+    "id": 2,
+    "products": [
+      {
+        "product": 1,
+        "quantity": 2
+      },
+      {
+        "product": 3,
+        "quantity": 12
+      },
+      {
+        "product": 2,
+        "quantity": 7
+      },
+      {
+        "product": 5,
+        "quantity": 20
+      }
+    ],
+    "createdAt": "2025-08-06T10:00:00Z",
+    "updatedAt": "2025-08-05T23:28:28.064Z",
+    "status": "active",
+    "total": 2360
+  },
+  {
+    "id": 3,
+    "products": [
+      {
+        "product": 4,
+        "quantity": 1
+      }
+    ],
+    "createdAt": "2025-08-07T12:00:00Z",
+    "updatedAt": "2025-08-07T12:30:00Z",
+    "status": "completed",
+    "total": 120
+  },
+  {
+    "id": 4,
+    "products": [],
+    "createdAt": "2025-08-05T23:01:51.936Z",
+    "updatedAt": "2025-08-05T23:01:51.937Z",
+    "status": "active"
+  },
+  {
+    "id": 5,
+    "products": [],
+    "createdAt": "2025-08-05T23:03:56.482Z",
+    "updatedAt": "2025-08-05T23:03:56.482Z",
+    "status": "active"
+  }
+]

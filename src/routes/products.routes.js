@@ -9,7 +9,6 @@ import {
 
 const router = Router();
 
-// ✅ Rutas de productos
 router.get('/', getAllProducts);
 router.get('/:id', getProductById);
 router.post('/', createProduct);
