@@ -57,22 +57,30 @@ class CartsManager {
     return carts.find((c) => c.id === numericId) || null;
   }
 
-  // Agregar producto al carrito
+  // Agregar producto al carrito con control de stock
   async addProductToCart(cid, pid, quantity = 1) {
     const carts = await this.#readFile(this.cartsPath);
     const products = await this.#readFile(this.productsPath);
 
-
     // Buscar carrito
-    const cartIndex = carts.findIndex(c => c.id === cid);
-    if (cartIndex === -1) return { error: `No existe el carrito con ID ${cid}` };
+    const cartIndex = carts.findIndex((c) => c.id === cid);
+    if (cartIndex === -1)
+      return { error: `No existe el carrito con ID ${cid}` };
 
     // Verificar que el producto exista
-    const productExists = products.find(p => p.id === pid);
+    const productExists = products.find((p) => p.id === pid);
     if (!productExists) return { error: `No existe el producto con ID ${pid}` };
 
+    // 🔹 Verificar stock disponible
+    const productStock = productExists.stock;
+    if (productStock < quantity) {
+      return {
+        error: `Stock insuficiente para el producto ${pid}. Stock disponible: ${productStock}`,
+      };
+    }
+
     const cart = carts[cartIndex];
-    const productIndex = cart.products.findIndex(p => p.product === pid);
+    const productIndex = cart.products.findIndex((p) => p.product === pid);
 
     let message;
     if (productIndex === -1) {
@@ -81,7 +89,18 @@ class CartsManager {
       message = `Producto ${pid} agregado al carrito ${cid} con cantidad ${quantity}`;
     } else {
       // Incrementar cantidad según lo enviado
-      cart.products[productIndex].quantity += quantity;
+      const currentQuantity = cart.products[productIndex].quantity;
+      const newQuantity = currentQuantity + quantity;
+
+      if (newQuantity > productStock) {
+        return {
+          error: `No puedes agregar ${quantity} unidades. Stock disponible: ${
+            productStock - currentQuantity
+          }`,
+        };
+      }
+
+      cart.products[productIndex].quantity = newQuantity;
       message = `Cantidad del producto ${pid} incrementada en carrito ${cid} (+${quantity})`;
     }
 
@@ -92,8 +111,7 @@ class CartsManager {
     await this.#writeFile(this.cartsPath, carts);
 
     return { message, cart };
-  }   
-
+  }
 
   // Eliminar carrito por ID
   async deleteCart(id) {
