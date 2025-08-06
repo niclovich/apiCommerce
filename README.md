@@ -49,17 +49,16 @@ npm start
 | POST   | `/api/products`         | Crea un nuevo producto              |
 
 **Ejemplo de producto (JSON):**
-```json
-{
-  "title": "Teclado Mecánico RGB",
-  "description": "Teclado retroiluminado",
-  "code": "TECRGB01",
-  "price": 80,
-  "status": true,
-  "stock": 25,
-  "category": "Periféricos",
-  "thumbnails": ["/images/teclados/teclado_rgb_front.jpg"]
-}
+echo '{
+  "id": 1,
+  "products": [
+    { "product": 1, "quantity": 2 }
+  ],
+  "total": 300,
+  "createdAt": "2025-08-05T21:00:00.000Z",
+  "updatedAt": "2025-08-05T21:10:00.000Z",
+  "status": "active"
+}' | jq
 
 ### 🛒 Carritos
 
