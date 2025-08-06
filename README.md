@@ -47,8 +47,8 @@ npm start
 | GET    | `/api/products`         | Obtiene todos los productos         |
 | GET    | `/api/products/:id`     | Obtiene un producto por su ID       |
 | POST   | `/api/products`         | Crea un nuevo producto              |
-
 **Ejemplo de producto (JSON):**
+```json
 {
   "title": "Teclado Mecánico RGB",
   "description": "Teclado retroiluminado",
@@ -59,7 +59,6 @@ npm start
   "category": "Periféricos",
   "thumbnails": ["/images/teclados/teclado_rgb_front.jpg"]
 }
-
 ### 🛒 Carritos
 
 | Método  | Endpoint                                | Descripción                                    |
