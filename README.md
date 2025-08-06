@@ -5,8 +5,7 @@ Permite realizar operaciones CRUD sobre **productos** y **carritos de compra**.
 
 ----------------------------------------------------------
 ## 📂 Estructura de Carpetas
-```json
-
+```bash
 apiCommerce/
 ├─ src/
 │  ├─ controllers/        # Lógica de negocio (maneja req/res)
