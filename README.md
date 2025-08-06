@@ -48,7 +48,7 @@ npm start
 | GET    | `/api/products/:id`     | Obtiene un producto por su ID       |
 | POST   | `/api/products`         | Crea un nuevo producto              |
 **Ejemplo de producto (JSON):**
-```json
+```bash
 {
   "title": "Teclado Mecánico RGB",
   "description": "Teclado retroiluminado",
