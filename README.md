@@ -5,6 +5,7 @@ Permite realizar operaciones CRUD sobre **productos** y **carritos de compra**.
 
 ----------------------------------------------------------
 ## 📂 Estructura de Carpetas
+```json
 
 apiCommerce/
 ├─ src/
@@ -15,7 +16,7 @@ apiCommerce/
 │  └─ app.js              # Configuración principal del servidor
 ├─ package.json
 └─ node_modules/
-
+```
 ----------------------------------------------------------
 ## 🚀 Instalación y Ejecución
 
