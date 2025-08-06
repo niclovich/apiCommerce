@@ -19,7 +19,6 @@ Permite realizar operaciones **CRUD** sobre productos.
 ## **🚀 Instalación y ejecución**
 
 1️⃣ **Clonar el repositorio**
-```bash
 git clone https://github.com/usuario/apiCommerce.git
 cd apiCommerce
 # apiCommerce
