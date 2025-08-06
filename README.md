@@ -34,14 +34,10 @@ npm run dev
 npm start
 
 ### La consola mostrará:
-# 🚀 Servidor corriendo en http://localhost:3000
-# 📂 Leyendo JSON desde: ./src/data/products.json
+ 🚀 Servidor corriendo en http://localhost:3000
 
 ----------------------------------------------------------
 ## ENDPOINTS DISPONIBLES
-
-
-
 
 ### 🛍 Productos
 
@@ -53,7 +49,6 @@ npm start
 | POST   | `/api/products`         | Crea un nuevo producto              |
 
 **Ejemplo de producto (JSON):**
-```json
 {
   "title": "Teclado Mecánico RGB",
   "description": "Teclado retroiluminado",
@@ -64,26 +59,18 @@ npm start
   "category": "Periféricos",
   "thumbnails": ["/images/teclados/teclado_rgb_front.jpg"]
 }
-==========================
-CARRITOS
-==========================
 
-1️⃣ POST /api/carts
-Descripción: Crea un nuevo carrito
-Respuesta:
-{
-  "id": 1,
-  "products": [],
-  "createdAt": "2025-08-05T21:00:00.000Z",
-  "updatedAt": "2025-08-05T21:00:00.000Z",
-  "status": "active"
-}
+### 🛒 Carritos
 
-----------------------------------------------------------
-2️⃣ GET /api/carts/:id
-Descripción: Obtiene un carrito por su ID
-Ejemplo: GET http://localhost:3000/api/carts/1
-Respuesta:
+| Método  | Endpoint                                | Descripción                                    |
+|---------|----------------------------------------|------------------------------------------------|
+| **POST**   | `/api/carts`                            | Crea un nuevo carrito                          |
+| **GET**    | `/api/carts/:id`                        | Obtiene un carrito por su ID                   |
+| **POST**   | `/api/carts/:cid/products/:pid`         | Agrega un producto al carrito (con control de stock) |
+| **DELETE** | `/api/carts/:id`                        | Elimina un carrito por su ID                   |
+
+**Ejemplo de carrito (JSON):**
+```json
 {
   "id": 1,
   "products": [
@@ -94,38 +81,8 @@ Respuesta:
   "updatedAt": "2025-08-05T21:10:00.000Z",
   "status": "active"
 }
-
 ----------------------------------------------------------
-3️⃣ POST /api/carts/:cid/products/:pid
-Descripción: Agrega un producto al carrito con control de stock
-Body (opcional):
-{
-  "quantity": 3
-}
-Respuesta exitosa:
-{
-  "message": "Producto 1 agregado al carrito 1 con cantidad 3",
-  "cart": {
-    "id": 1,
-    "products": [
-      { "product": 1, "quantity": 3 }
-    ],
-    "total": 450,
-    "updatedAt": "2025-08-05T21:15:00.000Z"
-  }
-}
-
-----------------------------------------------------------
-4️⃣ DELETE /api/carts/:id
-Descripción: Elimina un carrito por su ID
-Respuesta:
-{
-  "message": "Carrito con ID 1 eliminado correctamente",
-  "deleted": { ...carritoEliminado }
-}
-
-----------------------------------------------------------
-📝 NOTAS FINALES
+## NOTAS FINALES
 
 - Esta API usa JSON local, ideal para desarrollo rápido sin base de datos real.
 - Para entornos productivos, se recomienda usar una base de datos real y variables de entorno.
