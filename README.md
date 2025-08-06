@@ -48,19 +48,7 @@ npm start
 | GET    | `/api/products/:id`     | Obtiene un producto por su ID       |
 | POST   | `/api/products`         | Crea un nuevo producto              |
 **Ejemplo de producto (JSON):**
-  \`\`\`bash  
-{
-  "title": "Teclado Mecánico RGB",
-  "description": "Teclado retroiluminado",
-  "code": "TECRGB01",
-  "price": 80,
-  "status": true,
-  "stock": 25,
-  "category": "Periféricos",
-  "thumbnails": ["/images/teclados/teclado_rgb_front.jpg"]
-}
-\`\`\`  
-
+<pre> **Ejemplo de producto (JSON):** ```bash { "title": "Teclado Mecánico RGB", "description": "Teclado retroiluminado", "code": "TECRGB01", "price": 80, "status": true, "stock": 25, "category": "Periféricos", "thumbnails": ["/images/teclados/teclado_rgb_front.jpg"] } ``` </pre>
 ### 🛒 Carritos
 
 | Método  | Endpoint                                | Descripción                                    |
