@@ -5,12 +5,28 @@
       {
         "product": 5,
         "quantity": 12
+      },
+      {
+        "product": 10,
+        "quantity": 3
+      },
+      {
+        "product": 9,
+        "quantity": 2
+      },
+      {
+        "product": 1,
+        "quantity": 2
+      },
+      {
+        "product": 8,
+        "quantity": 2
       }
     ],
     "createdAt": "2025-08-05T15:30:00Z",
-    "updatedAt": "2025-08-05T23:35:30.134Z",
+    "updatedAt": "2025-08-06T00:06:50.512Z",
     "status": "active",
-    "total": 720
+    "total": 1345
   },
   {
     "id": 2,

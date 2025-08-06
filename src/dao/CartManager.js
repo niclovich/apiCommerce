@@ -62,6 +62,7 @@ class CartsManager {
     const carts = await this.#readFile(this.cartsPath);
     const products = await this.#readFile(this.productsPath);
 
+
     // Buscar carrito
     const cartIndex = carts.findIndex(c => c.id === cid);
     if (cartIndex === -1) return { error: `No existe el carrito con ID ${cid}` };
@@ -74,7 +75,6 @@ class CartsManager {
     const productIndex = cart.products.findIndex(p => p.product === pid);
 
     let message;
-
     if (productIndex === -1) {
       // Agregar nuevo producto con cantidad
       cart.products.push({ product: pid, quantity });
@@ -92,7 +92,7 @@ class CartsManager {
     await this.#writeFile(this.cartsPath, carts);
 
     return { message, cart };
-  }
+  }   
 
 
   // Eliminar carrito por ID

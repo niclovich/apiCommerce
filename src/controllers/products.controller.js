@@ -109,7 +109,7 @@ export const updateProduct = async (req, res) => {
     }
 
     res.status(200).json({
-      message: "✅ Producto actualizado correctamente",
+      message: "Producto actualizado correctamente",
       product: actualizado,
     });
   } catch (error) {
@@ -137,7 +137,7 @@ export const deleteProduct = async (req, res) => {
     }
 
     res.status(200).json({
-      message: "✅ Producto eliminado correctamente",
+      message: " Producto eliminado correctamente",
       deleted: eliminado.deleted,
     });
   } catch (error) {
