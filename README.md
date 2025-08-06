@@ -72,7 +72,6 @@ npm start
 
 **Ejemplo de carrito (JSON):**
 
-```bash
 echo '{
   "id": 1,
   "products": [
@@ -82,8 +81,7 @@ echo '{
   "createdAt": "2025-08-05T21:00:00.000Z",
   "updatedAt": "2025-08-05T21:10:00.000Z",
   "status": "active"
-}' | jq
-----------------------------------------------------------
+}' | jq-------------------------------------------------
 ## NOTAS FINALES
 
 - Esta API usa JSON local, ideal para desarrollo rápido sin base de datos real.
