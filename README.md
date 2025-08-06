@@ -4,7 +4,7 @@ API REST de ejemplo desarrollada con Node.js + Express usando ES Modules y un JS
 Permite realizar operaciones CRUD sobre **productos** y **carritos de compra**.
 
 ----------------------------------------------------------
-📂 ESTRUCTURA DE CARPETAS
+## 📂 Estructura de Carpetas
 
 apiCommerce/
 ├─ src/
@@ -17,79 +17,43 @@ apiCommerce/
 └─ node_modules/
 
 ----------------------------------------------------------
-🚀 INSTALACIÓN Y EJECUCIÓN
+## 🚀 Instalación y Ejecución
 
-# 1️⃣ Clonar el repositorio
+### 1️⃣ Clonar el repositorio
 git clone https://github.com/usuario/apiCommerce.git
 cd apiCommerce
 
-# 2️⃣ Instalar dependencias
+### 2️⃣ Instalar dependencias
 npm install
 
-# 3️⃣ Iniciar el servidor
-# Modo desarrollo (con nodemon)
+### 3️⃣ Iniciar el servidor
+###  Modo desarrollo (con nodemon)
 npm run dev
 
-# Modo producción
+### Modo producción
 npm start
 
-# La consola mostrará:
+### La consola mostrará:
 # 🚀 Servidor corriendo en http://localhost:3000
 # 📂 Leyendo JSON desde: ./src/data/products.json
 
 ----------------------------------------------------------
-📡 ENDPOINTS DISPONIBLES
+## ENDPOINTS DISPONIBLES
 
-==========================
-PRODUCTOS
-==========================
 
-1️⃣ GET /
-Descripción: Prueba de conexión
-Ejemplo: GET http://localhost:3000/
-Respuesta:
-🚀 Servidor corriendo en http://localhost:3000
 
-----------------------------------------------------------
-2️⃣ GET /api/products
-Descripción: Obtiene todos los productos
-Ejemplo: GET http://localhost:3000/api/products
-Respuesta:
-[
-  {
-    "id": 1,
-    "title": "Monitor 24\" Full HD",
-    "description": "Monitor LED de 24 pulgadas",
-    "code": "MON24FHD",
-    "price": 150,
-    "status": true,
-    "stock": 10,
-    "category": "Electrónica",
-    "thumbnails": ["/images/monitores/monitor24_front.jpg"]
-  }
-]
 
-----------------------------------------------------------
-3️⃣ GET /api/products/:id
-Descripción: Obtiene un producto por su ID
-Ejemplo: GET http://localhost:3000/api/products/1
-Respuesta:
-{
-  "id": 1,
-  "title": "Monitor 24\" Full HD",
-  "description": "Monitor LED de 24 pulgadas",
-  "code": "MON24FHD",
-  "price": 150,
-  "status": true,
-  "stock": 10,
-  "category": "Electrónica",
-  "thumbnails": ["/images/monitores/monitor24_front.jpg"]
-}
+### 🛍 Productos
 
-----------------------------------------------------------
-4️⃣ POST /api/products
-Descripción: Crea un nuevo producto
-Body (JSON):
+| Método | Endpoint                 | Descripción                         |
+|--------|-------------------------|-------------------------------------|
+| GET    | `/`                     | Prueba de conexión                  |
+| GET    | `/api/products`         | Obtiene todos los productos         |
+| GET    | `/api/products/:id`     | Obtiene un producto por su ID       |
+| POST   | `/api/products`         | Crea un nuevo producto              |
+
+**Ejemplo de producto (JSON):**
+```json
 {
   "title": "Teclado Mecánico RGB",
   "description": "Teclado retroiluminado",
@@ -100,19 +64,6 @@ Body (JSON):
   "category": "Periféricos",
   "thumbnails": ["/images/teclados/teclado_rgb_front.jpg"]
 }
-Respuesta:
-{
-  "id": 2,
-  "title": "Teclado Mecánico RGB",
-  "description": "Teclado retroiluminado",
-  "code": "TECRGB01",
-  "price": 80,
-  "status": true,
-  "stock": 25,
-  "category": "Periféricos",
-  "thumbnails": ["/images/teclados/teclado_rgb_front.jpg"]
-}
-
 ==========================
 CARRITOS
 ==========================
