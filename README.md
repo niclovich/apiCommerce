@@ -71,8 +71,9 @@ npm start
 | **DELETE** | `/api/carts/:id`                        | Elimina un carrito por su ID                   |
 
 **Ejemplo de carrito (JSON):**
-```json
-{
+
+```bash
+echo '{
   "id": 1,
   "products": [
     { "product": 1, "quantity": 2 }
@@ -81,7 +82,7 @@ npm start
   "createdAt": "2025-08-05T21:00:00.000Z",
   "updatedAt": "2025-08-05T21:10:00.000Z",
   "status": "active"
-}
+}' | jq
 ----------------------------------------------------------
 ## NOTAS FINALES
 
