@@ -68,7 +68,6 @@ npm start
 | **POST**   | /api/carts                            | Crea un nuevo carrito                          |
 | **GET**    | /api/carts/:id                        | Obtiene un carrito por su ID                   |
 | **POST**   | /api/carts/:cid/products/:pid         | Agrega un producto al carrito (con control de stock) |
-| **DELETE** | /api/carts/:id                        | Elimina un carrito por su ID                   |
 
 **Ejemplo de carrito (JSON):**
 ```json
