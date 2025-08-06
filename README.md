@@ -43,35 +43,36 @@ npm start
 
 | Método | Endpoint                 | Descripción                         |
 |--------|-------------------------|-------------------------------------|
-| GET    | `/`                     | Prueba de conexión                  |
-| GET    | `/api/products`         | Obtiene todos los productos         |
-| GET    | `/api/products/:id`     | Obtiene un producto por su ID       |
-| POST   | `/api/products`         | Crea un nuevo producto              |
+| GET    | /                     | Prueba de conexión                  |
+| GET    | /api/products         | Obtiene todos los productos         |
+| GET    | /api/products/:id     | Obtiene un producto por su ID       |
+| POST   | /api/products         | Crea un nuevo producto              |
 
 **Ejemplo de producto (JSON):**
-echo '{
-  "id": 1,
-  "products": [
-    { "product": 1, "quantity": 2 }
-  ],
-  "total": 300,
-  "createdAt": "2025-08-05T21:00:00.000Z",
-  "updatedAt": "2025-08-05T21:10:00.000Z",
-  "status": "active"
-}' | jq
-
+```json
+{
+  "title": "Teclado Mecánico RGB",
+  "description": "Teclado retroiluminado",
+  "code": "TECRGB01",
+  "price": 80,
+  "status": true,
+  "stock": 25,
+  "category": "Periféricos",
+  "thumbnails": ["/images/teclados/teclado_rgb_front.jpg"]
+}
+```
 ### 🛒 Carritos
 
 | Método  | Endpoint                                | Descripción                                    |
 |---------|----------------------------------------|------------------------------------------------|
-| **POST**   | `/api/carts`                            | Crea un nuevo carrito                          |
-| **GET**    | `/api/carts/:id`                        | Obtiene un carrito por su ID                   |
-| **POST**   | `/api/carts/:cid/products/:pid`         | Agrega un producto al carrito (con control de stock) |
-| **DELETE** | `/api/carts/:id`                        | Elimina un carrito por su ID                   |
+| **POST**   | /api/carts                            | Crea un nuevo carrito                          |
+| **GET**    | /api/carts/:id                        | Obtiene un carrito por su ID                   |
+| **POST**   | /api/carts/:cid/products/:pid         | Agrega un producto al carrito (con control de stock) |
+| **DELETE** | /api/carts/:id                        | Elimina un carrito por su ID                   |
 
 **Ejemplo de carrito (JSON):**
-
-echo '{
+```json
+{
   "id": 1,
   "products": [
     { "product": 1, "quantity": 2 }
@@ -80,7 +81,8 @@ echo '{
   "createdAt": "2025-08-05T21:00:00.000Z",
   "updatedAt": "2025-08-05T21:10:00.000Z",
   "status": "active"
-}' | jq-------------------------------------------------
+}
+```
 ## NOTAS FINALES
 
 - Esta API usa JSON local, ideal para desarrollo rápido sin base de datos real.
