@@ -5,21 +5,28 @@ const ProductManager = new ProductoManager();
 //  Obtener todos los productos
 export const getAllProducts = async (req, res) => {
   //res.send('Entró a getAllProducts');
-
-  const productos = await ProductManager.getAllProducts();
-  res.json(productos);
+  try {
+    const productos = await ProductManager.getAllProducts();
+    res.json(productos);
+  } catch (error) {
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
 };
 
 //  Obtener producto por ID
 export const getProductById = async (req, res) => {
   const id = parseInt(req.params.id);
-  const producto = await ProductManager.getProductById(id);
+  try {
+    const producto = await ProductManager.getProductById(id);
 
-  if (!producto) {
-    return res.status(404).json({ error: "Producto no encontrado" });
+    if (!producto) {
+      return res.status(404).json({ error: "Producto no encontrado" });
+    }
+
+    res.json(producto);
+  } catch (error) {
+    res.status(500).json({ error: "Error interno del servidor" });
   }
-
-  res.json(producto);
 };
 
 export const createProduct = async (req, res) => {
@@ -129,7 +136,6 @@ export const deleteProduct = async (req, res) => {
         .json({ error: "El ID debe ser un número válido." });
     }
 
-    // 2️⃣ Intentar eliminar
     const eliminado = await ProductManager.deleteProduct(productId);
 
     if (eliminado.error) {

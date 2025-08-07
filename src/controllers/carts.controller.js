@@ -23,14 +23,23 @@ export const getCartById = async (req, res) => {
   }
 };
 export const addProductToCart = async (req, res) => {
-  const { cid, pid } = req.params;
-  const { quantity = 1 } = req.body; // Si no mandás quantity, suma 1 por defecto
+  try {
+    const { cid, pid } = req.params;
+    const { quantity = 1 } = req.body; // Si no mandás quantity, suma 1 por defecto
 
-  const result = await cartsManager.addProductToCart(Number(cid), Number(pid), Number(quantity));
+    const result = await cartsManager.addProductToCart(
+      Number(cid),
+      Number(pid),
+      Number(quantity)
+    );
 
-  if (result.error) {
-    return res.status(404).json({ error: result.error });
+    if (result.error) {
+      return res.status(404).json({ error: result.error });
+    }
+
+    res.status(200).json(result); // { message, cart }
+  } catch (error) {
+    console.error("Error en addProductToCart:", error);
+    return res.status(500).json({ error: "Error interno del servidor" });
   }
-
-  res.status(200).json(result); // { message, cart }
 };
