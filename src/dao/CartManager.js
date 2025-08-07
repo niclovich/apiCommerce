@@ -51,10 +51,32 @@ class CartsManager {
   }
 
   // Obtener carrito por ID
+  // Obtener carrito por ID con detalle de productos
   async getCartById(id) {
     const carts = await this.#readFile(this.cartsPath);
+    const products = await this.#readFile(this.productsPath);
     const numericId = Number(id);
-    return carts.find((c) => c.id === numericId) || null;
+    const cart = carts.find((c) => c.id === numericId);
+
+    if (!cart) return null;
+
+    // Enriquecer productos con detalles
+    const detailedProducts = cart.products.map((item) => {
+      const productData = products.find((p) => p.id === item.product);
+      return {
+        product: productData || { id: item.product, error: 'Producto no encontrado' },
+        quantity: item.quantity,
+      };
+    });
+
+    // Calcular total actualizado
+    const total = await this.#calculateTotal(cart.products);
+
+    return {
+      ...cart,
+      products: detailedProducts,
+      total,
+    };
   }
 
   // Agregar producto al carrito con control de stock
@@ -71,7 +93,6 @@ class CartsManager {
     const productExists = products.find((p) => p.id === pid);
     if (!productExists) return { error: `No existe el producto con ID ${pid}` };
 
-    // 🔹 Verificar stock disponible
     const productStock = productExists.stock;
     if (productStock < quantity) {
       return {
