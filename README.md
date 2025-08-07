@@ -5,7 +5,7 @@ Permite realizar operaciones CRUD sobre **productos** y **carritos de compra**.
 
 ----------------------------------------------------------
 ## 📂 Estructura de Carpetas
-
+```bash
 apiCommerce/
 ├─ src/
 │  ├─ controllers/        # Lógica de negocio (maneja req/res)
@@ -15,7 +15,7 @@ apiCommerce/
 │  └─ app.js              # Configuración principal del servidor
 ├─ package.json
 └─ node_modules/
-
+```
 ----------------------------------------------------------
 ## 🚀 Instalación y Ejecución
 
@@ -68,7 +68,6 @@ npm start
 | **POST**   | /api/carts                            | Crea un nuevo carrito                          |
 | **GET**    | /api/carts/:id                        | Obtiene un carrito por su ID                   |
 | **POST**   | /api/carts/:cid/products/:pid         | Agrega un producto al carrito (con control de stock) |
-| **DELETE** | /api/carts/:id                        | Elimina un carrito por su ID                   |
 
 **Ejemplo de carrito (JSON):**
 ```json
