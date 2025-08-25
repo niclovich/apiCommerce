@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Prueba Socket.IO</title>
+</head>
+<body>
+  <h1>Chat en tiempo real</h1>
+
+  <input id="msg" placeholder="Escribe un mensaje..." />
+  <button onclick="sendMsg()">Enviar</button>
+  <ul id="chat"></ul>
+
+  <!-- Cliente Socket.IO -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    // Conexión al servidor en http://localhost:3000
+    const socket = io();
+
+    // Enviar mensaje al servidor
+    function sendMsg() {
+      const msg = document.getElementById("msg").value;
+      socket.emit("mensaje", msg);
+      document.getElementById("msg").value = "";
+    }
+
+    // Escuchar mensajes del servidor
+    socket.on("mensaje", (data) => {
+      const li = document.createElement("li");
+      li.textContent = data;
+      document.getElementById("chat").appendChild(li);
+    });
+  </script>
+</body>
+</html>

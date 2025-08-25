@@ -134,5 +134,16 @@
     "thumbnails": [
       "/images/lamparas/lampara_led_front.jpg"
     ]
+  },
+  {
+    "id": 11,
+    "title": "Product1",
+    "description": "TELEVISOR",
+    "code": "ASDAS78",
+    "price": 385,
+    "status": true,
+    "stock": 20,
+    "category": "TELEVISORES",
+    "thumbnails": []
   }
 ]

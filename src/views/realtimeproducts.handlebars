@@ -1,0 +1,85 @@
+{{!-- Barra de acciones --}}
+<div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+  <a class="btn btn-primary" href="/products/new">
+    <i class="bi bi-plus-lg"></i> Agregar
+  </a>
+  <span class="ms-auto badge rounded-pill text-bg-info">
+    {{#if products.length}}{{products.length}} productos{{else}}0 productos{{/if}}
+  </span>
+</div>
+
+{{#if products.length}}
+ <div class="card shadow-sm">
+    <div class="card-header bg-dark text-white d-flex align-items-center">
+      <i class="bi bi-table me-2"></i>
+      <strong>Listado de productos</strong>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle mb-0">
+        <thead class="table-primary">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Código</th>
+            <th scope="col" class="text-end">Precio</th>
+            <th scope="col" class="text-center">Stock</th>
+            <th scope="col">Categoría</th>
+            <th scope="col" class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each products}}
+            <tr>
+              <th scope="row">{{this.id}}</th>
+              <td class="fw-medium">
+                {{this.title}}
+                {{#if this.thumbnail}}
+                  <span class="badge text-bg-info ms-2">con imagen</span>
+                {{/if}}
+              </td>
+              <td><span class="badge text-bg-secondary">{{this.code}}</span></td>
+              <td class="text-end">${{this.price}}</td>
+              <td class="text-center">
+                {{#if this.stock}}
+                  <span class="badge text-bg-success">
+                    {{this.stock}}
+                  </span>
+                {{else}}
+                  <span class="badge text-bg-danger">0</span>
+                {{/if}}
+              </td>
+              <td>{{this.category}}</td>
+              <td class="text-center">
+                <div class="btn-group" role="group">
+                  <a class="btn btn-sm btn-primary" title="Actualizar" href="/products/edit/{{id}}">
+                    <i class="bi bi-pencil-square"></i>
+                  </a>
+                  <button class="btn btn-sm btn-danger" title="Eliminar">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+        <tfoot class="table-light">
+          <tr>
+            <td colspan="7" class="text-end">
+              <span class="badge text-bg-secondary">
+                Total: {{products.length}} ítems
+              </span>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+{{else}}
+  <div class="alert alert-info">
+    <i class="bi bi-info-circle-fill me-2"></i>
+    No hay productos para mostrar.
+    <button class="btn btn-sm btn-primary ms-2">
+      <i class="bi bi-plus-lg"></i> Agregar
+    </button>
+  </div>
+{{/if}}

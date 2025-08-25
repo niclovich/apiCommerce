@@ -1,0 +1,102 @@
+<div class="card shadow-sm">
+  <div class="card-header bg-primary text-white d-flex align-items-center">
+    <i class="bi bi-pencil-square me-2"></i>
+    <strong>{{title}}</strong>
+  </div>
+
+  <div class="card-body">
+    <form id="formEdit" class="row g-3" data-id="{{product.id}}">
+      <div class="col-md-6">
+        <label class="form-label">Título</label>
+        <input name="title" type="text" class="form-control" value="{{product.title}}" required />
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Código</label>
+        <input name="code" type="text" class="form-control" value="{{product.code}}" required />
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Categoría</label>
+        <input name="category" type="text" class="form-control" value="{{product.category}}" />
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Precio</label>
+        <input name="price" type="number" step="0.01" min="0" class="form-control" value="{{product.price}}" required />
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Stock</label>
+        <input name="stock" type="number" min="0" class="form-control" value="{{product.stock}}" required />
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label d-block">Estado</label>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="status" name="status" {{#if product.status}}checked{{/if}}>
+          <label class="form-check-label" for="status">Activo</label>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Descripción</label>
+        <textarea name="description" class="form-control" rows="3">{{product.description}}</textarea>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Thumbnails (URLs separadas por coma)</label>
+        <input name="thumbnails" type="text" class="form-control" value="{{product.thumbsCSV}}" />
+      </div>
+
+      <div class="col-12 d-flex gap-2">
+        <button class="btn btn-primary" type="submit">
+          <i class="bi bi-save2"></i> Guardar cambios
+        </button>
+        <a href="/" class="btn btn-outline-secondary">
+          <i class="bi bi-arrow-left"></i> Volver
+        </a>
+      </div>
+
+      <div id="msgEdit" class="col-12 d-none">
+        <div class="alert" role="alert"></div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  (function(){
+    const form = document.getElementById('formEdit');
+    const id = form.dataset.id;
+    const box = document.getElementById('msgEdit');
+    const alert = box.querySelector('.alert');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      data.price = Number(data.price);
+      data.stock = Number(data.stock);
+      data.status = document.getElementById('status').checked;
+      data.thumbnails = (data.thumbnails || '').split(',').map(s => s.trim()).filter(Boolean);
+
+      try {
+        const resp = await fetch(`/api/products/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+
+        box.classList.remove('d-none');
+        alert.className = 'alert alert-success';
+        alert.textContent = 'Producto actualizado con éxito.';
+        setTimeout(() => window.location.href = '/', 800);
+      } catch (err) {
+        box.classList.remove('d-none');
+        alert.className = 'alert alert-danger';
+        alert.textContent = 'No se pudo actualizar el producto.';
+      }
+    });
+  })();
+</script>
