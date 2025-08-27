@@ -1,47 +1,5 @@
 [
   {
-    "id": 1,
-    "title": "Monitor 27\" Full HD",
-    "description": "Monitor LED de 24 pulgadas, resolución 1920x1080",
-    "code": "MON24FHD",
-    "price": 150,
-    "status": true,
-    "stock": 10,
-    "category": "Electrónica",
-    "thumbnails": [
-      "/images/monitores/monitor24_front.jpg",
-      "/images/monitores/monitor24_back.jpg"
-    ]
-  },
-  {
-    "id": 2,
-    "title": "Teclado Mecánico RGB",
-    "description": "Teclado mecánico con retroiluminación RGB y switches rojos",
-    "code": "TECRGB01",
-    "price": 80,
-    "status": true,
-    "stock": 25,
-    "category": "Periféricos",
-    "thumbnails": [
-      "/images/teclados/teclado_rgb_front.jpg",
-      "/images/teclados/teclado_rgb_side.jpg"
-    ]
-  },
-  {
-    "id": 3,
-    "title": "Mouse Inalámbrico",
-    "description": "Mouse inalámbrico ergonómico con batería recargable",
-    "code": "MOUSEW01",
-    "price": 25,
-    "status": true,
-    "stock": 50,
-    "category": "Periféricos",
-    "thumbnails": [
-      "/images/mouse/mouse_wireless_top.jpg",
-      "/images/mouse/mouse_wireless_side.jpg"
-    ]
-  },
-  {
     "id": 4,
     "title": "Auriculares Bluetooth",
     "description": "Auriculares inalámbricos con cancelación de ruido",
@@ -84,66 +42,43 @@
   },
   {
     "id": 7,
-    "title": "Router WiFi Doble Banda",
-    "description": "Router WiFi AC1200, doble banda, ideal para streaming",
-    "code": "ROUTERDB01",
-    "price": 70,
+    "title": "Teclado Mecánico RGB",
+    "description": "Teclado mecánico con retroiluminación RGB personalizable",
+    "code": "TECRGB01",
+    "price": 75,
     "status": true,
-    "stock": 18,
-    "category": "Redes",
+    "stock": 12,
+    "category": "Periféricos",
     "thumbnails": [
-      "/images/routers/router_front.jpg",
-      "/images/routers/router_back.jpg"
+      "/images/teclados/teclado_rgb_front.jpg",
+      "/images/teclados/teclado_rgb_back.jpg"
     ]
   },
   {
     "id": 8,
-    "title": "Cargador Rápido USB-C",
-    "description": "Cargador rápido de 30W con puerto USB-C, compatible con la mayoría de dispositivos",
-    "code": "CARGADOR30W",
-    "price": 35,
+    "title": "Mouse Gamer Inalámbrico",
+    "description": "Mouse ergonómico con sensor óptico de alta precisión",
+    "code": "MOUSEG01",
+    "price": 45,
     "status": true,
-    "stock": 40,
-    "category": "Accesorios",
+    "stock": 25,
+    "category": "Periféricos",
     "thumbnails": [
-      "/images/cargadores/cargador_usb_c_front.jpg"
+      "/images/mouse/mouse_gamer_front.jpg"
     ]
   },
   {
     "id": 9,
-    "title": "Soporte para Monitor Ajustable",
-    "description": "Soporte ergonómico para monitor, ajustable en altura y ángulo",
-    "code": "SOPMON01",
-    "price": 45,
+    "title": "Monitor 27'' 2K",
+    "description": "Monitor IPS QHD con 144Hz para gaming y diseño",
+    "code": "MON27QHD",
+    "price": 320,
     "status": true,
-    "stock": 22,
-    "category": "Muebles",
+    "stock": 8,
+    "category": "Monitores",
     "thumbnails": [
-      "/images/soportes/soporte_monitor_front.jpg"
+      "/images/monitores/monitor27_front.jpg",
+      "/images/monitores/monitor27_side.jpg"
     ]
-  },
-  {
-    "id": 10,
-    "title": "Lámpara LED de Escritorio",
-    "description": "Lámpara LED regulable con puerto USB para carga",
-    "code": "LAMLED01",
-    "price": 55,
-    "status": true,
-    "stock": 28,
-    "category": "Iluminación",
-    "thumbnails": [
-      "/images/lamparas/lampara_led_front.jpg"
-    ]
-  },
-  {
-    "id": 11,
-    "title": "Product1",
-    "description": "TELEVISOR",
-    "code": "ASDAS78",
-    "price": 385,
-    "status": true,
-    "stock": 20,
-    "category": "TELEVISORES",
-    "thumbnails": []
   }
 ]

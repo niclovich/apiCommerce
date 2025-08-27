@@ -53,9 +53,9 @@
         <button class="btn btn-success" type="submit">
           <i class="bi bi-check2-circle"></i> Guardar
         </button>
-        <a href="/" class="btn btn-outline-secondary">
-          <i class="bi bi-arrow-left"></i> Volver
-        </a>
+        <a href="/realtimeproducts" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i> Volver
+      </a>
       </div>
 
       <div id="msgNew" class="col-12 d-none">
@@ -87,10 +87,11 @@
         });
         if (!resp.ok) throw new Error('HTTP ' + resp.status);
 
-        box.classList.remove('d-none');
-        alert.className = 'alert alert-success';
-        alert.textContent = 'Producto creado con éxito.';
-        setTimeout(() => window.location.href = '/', 800);
+          box.classList.remove('d-none');
+          alert.className = 'alert alert-success';
+          alert.textContent = 'Producto creado con éxito.';
+          setTimeout(() => (window.location.href = '/realtimeproducts'), 500);
+
       } catch (err) {
         box.classList.remove('d-none');
         alert.className = 'alert alert-danger';

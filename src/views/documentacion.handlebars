@@ -1,0 +1,69 @@
+<h1 class="text-center mb-5">{{title}}</h1>
+
+{{!-- Helper visual para método --}}
+{{!-- Puedes cambiar colores si querés --}}
+{{#*inline "methodBadge"}}
+  {{#if (eq this "GET")}}    <span class="badge bg-success">GET</span>
+  {{else if (eq this "POST")}} <span class="badge bg-primary">POST</span>
+  {{else if (eq this "PUT")}}  <span class="badge bg-warning text-dark">PUT</span>
+  {{else if (eq this "DELETE")}} <span class="badge bg-danger">DELETE</span>
+  {{else}} <span class="badge bg-secondary">{{this}}</span>
+  {{/if}}
+{{/inline}}
+
+<h2 class="text-primary">Rutas de Productos <code>/api/products</code></h2>
+<div class="table-responsive">
+  <table class="table table-bordered table-striped align-middle">
+    <thead class="table-primary">
+      <tr><th>Método</th><th>Path</th><th>Descripción</th><th>Parámetros</th></tr>
+    </thead>
+    <tbody>
+      {{#each routes.products}}
+        <tr>
+          <td>{{> methodBadge this.method}}</td>
+          <td><code>{{path}}</code></td>
+          <td>{{desc}}</td>
+          <td>{{params}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<h2 class="text-primary mt-5">Rutas de Carritos <code>/api/carts</code></h2>
+<div class="table-responsive">
+  <table class="table table-bordered table-striped align-middle">
+    <thead class="table-primary">
+      <tr><th>Método</th><th>Path</th><th>Descripción</th><th>Parámetros</th></tr>
+    </thead>
+    <tbody>
+      {{#each routes.carts}}
+        <tr>
+          <td>{{> methodBadge this.method}}</td>
+          <td><code>{{path}}</code></td>
+          <td>{{desc}}</td>
+          <td>{{params}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<h2 class="text-primary mt-5">Rutas de Vistas (HTML)</h2>
+<div class="table-responsive">
+  <table class="table table-bordered table-striped align-middle">
+    <thead class="table-primary">
+      <tr><th>Método</th><th>Path</th><th>Descripción</th><th>Parámetros</th></tr>
+    </thead>
+    <tbody>
+      {{#each routes.views}}
+        <tr>
+          <td>{{> methodBadge this.method}}</td>
+          <td><code>{{path}}</code></td>
+          <td>{{desc}}</td>
+          <td>{{params}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

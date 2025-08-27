@@ -4,6 +4,7 @@ const ProductManager = new ProductoManager();
 // referencia a socket.io (inyectada desde app.js)
 let io = null;
 export const setIO = (ioInstance) => { io = ioInstance; };
+const getSocketId = (req) => req.get('x-socket-id') || req.headers['x-socket-id'];
 
 // ---- VISTA REALTIME ----
 export const renderRealtimeProducts = async (_req, res) => {
@@ -78,16 +79,17 @@ export const createProduct = async (req, res) => {
       title, description, code, price, status, stock, category, thumbnails,
     } = req.body;
 
+    // Validaciones básicas
     if (!title || !code || price === undefined || stock === undefined) {
       return res.status(400).json({ error: "Los campos title, code, price y stock son obligatorios." });
     }
     if (typeof title !== "string" || typeof code !== "string") {
       return res.status(400).json({ error: "title y code deben ser cadenas de texto." });
     }
-    if (isNaN(price) || price < 0) {
+    if (isNaN(price) || Number(price) < 0) {
       return res.status(400).json({ error: "price debe ser un número mayor o igual a 0." });
     }
-    if (isNaN(stock) || stock < 0) {
+    if (isNaN(stock) || Number(stock) < 0) {
       return res.status(400).json({ error: "stock debe ser un número mayor o igual a 0." });
     }
 
@@ -99,16 +101,28 @@ export const createProduct = async (req, res) => {
       status ?? true,
       parseInt(stock, 10),
       category || "",
-      thumbnails || []
+      Array.isArray(thumbnails) ? thumbnails : []
     );
 
-    // 🔊 Emitir evento de creación
-    if (io && !nuevo?.error) io.emit('products:created', nuevo);
+    if (nuevo?.error) {
+      return res.status(400).json(nuevo);
+    }
 
-    res.status(201).json({ message: "Producto creado correctamente", product: nuevo });
+    // Emitir a todos EXCEPTO al emisor (si tenemos su socketId)
+    const socketId = getSocketId(req);
+    if (io) {
+      if (socketId) {
+        io.except(socketId).emit('products:created', nuevo);
+      } else {
+        // fallback si no nos mandan el header
+        io.emit('products:created', nuevo);
+      }
+    }
+
+    return res.status(201).json({ message: "Producto creado correctamente", product: nuevo });
   } catch (error) {
-    console.error("❌ Error en createProduct:", error.message);
-    res.status(500).json({ error: "Error interno del servidor", details: error.message });
+    console.error("❌ Error en createProduct:", error);
+    return res.status(500).json({ error: "Error interno del servidor", details: error.message });
   }
 };
 
@@ -122,33 +136,80 @@ export const updateProduct = async (req, res) => {
       return res.status(400).json({ error: "Debe enviar al menos un campo para actualizar." });
     }
 
+    // Normalizar numéricos si vienen como string
+    if (data.price !== undefined) {
+      if (isNaN(data.price) || Number(data.price) < 0) {
+        return res.status(400).json({ error: "price debe ser un número mayor o igual a 0." });
+      }
+      data.price = parseFloat(data.price);
+    }
+    if (data.stock !== undefined) {
+      if (isNaN(data.stock) || Number(data.stock) < 0) {
+        return res.status(400).json({ error: "stock debe ser un número mayor o igual a 0." });
+      }
+      data.stock = parseInt(data.stock, 10);
+    }
+    if (data.thumbnails && !Array.isArray(data.thumbnails)) {
+      return res.status(400).json({ error: "thumbnails debe ser un array de strings." });
+    }
+
     const actualizado = await ProductManager.updateProduct(productId, data);
     if (actualizado.error) return res.status(404).json(actualizado);
 
-    // 🔊 Emitir evento de actualización
-    if (io) io.emit('products:updated', actualizado);
+    // Emitir a todos EXCEPTO al emisor
+    const socketId = getSocketId(req);
+    if (io) {
+      if (socketId) {
+        io.except(socketId).emit('products:updated', actualizado);
+      } else {
+        io.emit('products:updated', actualizado);
+      }
+    }
 
-    res.status(200).json({ message: "Producto actualizado correctamente", product: actualizado });
+    return res.status(200).json({ message: "Producto actualizado correctamente", product: actualizado });
   } catch (error) {
-    console.error("❌ Error en updateProduct:", error.message);
-    res.status(500).json({ error: "Error interno del servidor" });
+    console.error("❌ Error en updateProduct:", error);
+    return res.status(500).json({ error: "Error interno del servidor", details: error.message });
   }
 };
 
 export const deleteProduct = async (req, res) => {
   try {
     const productId = parseInt(req.params.id, 10);
-    if (isNaN(productId)) return res.status(400).json({ error: "El ID debe ser un número válido." });
+    if (isNaN(productId)) {
+      return res.status(400).json({ error: "El ID debe ser un número válido." });
+    }
 
+    // Puede devolver, por ejemplo:
+    // { deleted: 7 }  ó  { id: 7 }  ó  true/1 (afectados)
     const eliminado = await ProductManager.deleteProduct(productId);
-    if (eliminado.error) return res.status(404).json(eliminado);
+    if (eliminado?.error) {
+      return res.status(404).json(eliminado);
+    }
 
-    // 🔊 Emitir evento de eliminación
-    if (io) io.emit('products:deleted', eliminado.deleted);
+    // Normalizo el ID eliminado:
+    const id =
+      eliminado?.deleted ??
+      eliminado?.id ??
+      productId; // fallback si el manager no devuelve el id
 
-    res.status(200).json({ message: "Producto eliminado correctamente", deleted: eliminado.deleted });
+    // Emitir a todos EXCEPTO al emisor, con un payload unificado
+    const socketId = getSocketId(req);
+    const payload = { deleted: id };
+    if (io) {
+      if (socketId) {
+        io.except(socketId).emit('products:deleted', payload);
+      } else {
+        io.emit('products:deleted', payload);
+      }
+    }
+
+    return res.status(200).json({
+      message: "Producto eliminado correctamente",
+      deleted: id
+    });
   } catch (error) {
-    console.error("❌ Error en deleteProduct:", error.message);
-    res.status(500).json({ error: "Error interno del servidor" });
+    console.error("❌ Error en deleteProduct:", error);
+    return res.status(500).json({ error: "Error interno del servidor", details: error.message });
   }
 };
